@@ -14,22 +14,28 @@ public class JSonTest {
         JSon jSon = new JSon();
         assertEquals("Ilma mockimata",300,jSon.getData());
     }
-
+    
     @Test
-    public void Mock1(){
-        JSon jason = Mockito.spy(JSon.class);
-        jason.getData();
-        verify(jason, times(1)).getCommentsArraySize();
-        verify(jason, times(1)).getTodosArraySize();
+    public void Test2(){
+    	JSon jSon = new JSon();
+        assertEquals("Testime getCommetsArraySize funktsiooni",500,jSon.getCommentsArraySize());
+    }
+    
+    @Test
+    public void Test3(){
+    	JSon jSon = new JSon();
+        assertEquals("Testime getTodosArraySize funktsiooni",200,jSon.getTodosArraySize());
     }
 
-    @Test
-    public void Mock2(){
+
+
+    @Test // Siin kasutame mocki
+    public void Mock(){
         JSon mockingJ = Mockito.mock(JSon.class);
-        when(mockingJ.getData()).thenCallRealMethod();
-        when(mockingJ.getCommentsArraySize()).thenReturn(600);
-        when(mockingJ.getTodosArraySize()).thenReturn(200);
-        assertEquals("Mocki kasutamine", 400, mockingJ.getData());
+        when(mockingJ.getData()).thenCallRealMethod(); // callib päris meetodi
+        when(mockingJ.getCommentsArraySize()).thenReturn(500); // teeb nii et getCommentsArraySize tagastab 600
+        when(mockingJ.getTodosArraySize()).thenReturn(200); // teeb nii et getTodosArraySize tagastab 200
+        assertEquals("Mocki kasutamine", 300, mockingJ.getData());
 
     }
 

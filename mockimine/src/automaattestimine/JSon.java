@@ -8,8 +8,8 @@ import java.net.URL;
 
 
 public class JSon {
-    private static JSONArray commentsArray;
-    private static JSONArray todosArray;
+    private static JSONArray commentsArray; //et ei peaks getData() meetodi sees declarima ja et saaks eraldi funktsiooni
+    private static JSONArray todosArray; // välja kutsuda mis tagastab selle array size
 
 
     public static void main(String[] args){
@@ -50,11 +50,11 @@ public class JSon {
         }
         return 0;
     }
-    public int getCommentsArraySize(){
-        return commentsArray.size();
+    public int getCommentsArraySize(){ //eraldi meetod size tagastamiseks
+        return (commentsArray.size());
     }
 
-    public int getTodosArraySize(){
+    public int getTodosArraySize(){   //eraldi meetod size tagastamiseks
         return todosArray.size();
     }
 }
