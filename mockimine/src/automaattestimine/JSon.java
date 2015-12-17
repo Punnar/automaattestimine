@@ -8,10 +8,7 @@ import java.net.URL;
 
 
 public class JSon {
-    private static JSONArray commentsArray; //et ei peaks getData() meetodi sees declarima ja et saaks eraldi funktsiooni
-    private static JSONArray todosArray; // välja kutsuda mis tagastab selle array size
-
-
+  
     public static void main(String[] args){
         JSon a = new JSon();
         System.out.println(a.getData());
@@ -28,33 +25,50 @@ public class JSon {
 
 
     protected int getData() {
-        try {
-            URL url = new URL("http://jsonplaceholder.typicode.com/comments");
+    	return (getCommentsArraySize() - getTodosArraySize());
+    }
+    
+    
+    private static JSONArray getCommentsArray() {
+    	try {
+    		URL url = new URL("http://jsonplaceholder.typicode.com/comments");
             JSONParser parser = new JSONParser();
-
             InputStream is = url.openStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
             Object comments = parser.parse(readAll(bufferedReader));
-            commentsArray = (JSONArray) comments;
-
-            url = new URL("http://jsonplaceholder.typicode.com/todos");
-            is = url.openStream();
-            bufferedReader = new BufferedReader(new InputStreamReader(is));
-            Object todos = parser.parse(readAll(bufferedReader));
-            todosArray = (JSONArray) todos;
-
-            return (getCommentsArraySize() - getTodosArraySize());
-
-        } catch (Exception e) {
+            JSONArray commentsArray = (JSONArray) comments;
+            return commentsArray;
+    	} catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+    	JSONArray commentsArray = new JSONArray();
+    	return commentsArray;
+        
     }
+    
+    private static JSONArray getTodosArray() {
+    	try {
+    		URL url = new URL("http://jsonplaceholder.typicode.com/todos");
+            JSONParser parser = new JSONParser();
+            InputStream is = url.openStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+            Object todos = parser.parse(readAll(bufferedReader));
+            JSONArray todosArray = (JSONArray) todos;
+            return todosArray;
+    	} catch (Exception e) {
+            e.printStackTrace();
+        }
+    	JSONArray todosArray = new JSONArray();
+    	return todosArray;
+    }
+    
     public int getCommentsArraySize(){ //eraldi meetod size tagastamiseks
-        return (commentsArray.size());
+        return (getCommentsArray().size());
     }
+    
 
     public int getTodosArraySize(){   //eraldi meetod size tagastamiseks
-        return todosArray.size();
+        return (getTodosArray().size());
     }
 }
+
